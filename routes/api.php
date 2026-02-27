@@ -26,5 +26,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/profile', [App\Http\Controllers\Api\ProfileController::class, 'show']);
     Route::put('/profile', [App\Http\Controllers\Api\ProfileController::class, 'update']);
     Route::post('/profile/avatar', [App\Http\Controllers\Api\ProfileController::class, 'changeAvatar']);
+    Route::get('/profile/posts', [App\Http\Controllers\Api\ProfileController::class, 'posts']);
 });
 

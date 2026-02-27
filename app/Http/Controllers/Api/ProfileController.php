@@ -68,4 +68,10 @@ class ProfileController extends Controller
             'avatar' => asset('storage/' . $path),
         ]);
     }
+
+    public function posts(Request $request)
+    {
+        $posts = $request->user()->posts()->latest()->get();
+        return response()->json(['posts' => $posts]);
+    }
 }
