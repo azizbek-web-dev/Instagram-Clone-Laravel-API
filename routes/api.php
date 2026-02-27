@@ -27,5 +27,16 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/profile', [App\Http\Controllers\Api\ProfileController::class, 'update']);
     Route::post('/profile/avatar', [App\Http\Controllers\Api\ProfileController::class, 'changeAvatar']);
     Route::get('/profile/posts', [App\Http\Controllers\Api\ProfileController::class, 'posts']);
+
+    Route::get('/posts/feed', [App\Http\Controllers\Api\PostController::class, 'feed']);
+    Route::post('/posts', [App\Http\Controllers\Api\PostController::class, 'store']);
+    Route::get('/posts/{post}', [App\Http\Controllers\Api\PostController::class, 'show']);
+    Route::delete('/posts/{post}', [App\Http\Controllers\Api\PostController::class, 'destroy']);
+    Route::post('/posts/{post}/like', [App\Http\Controllers\Api\PostController::class, 'like']);
+    Route::delete('/posts/{post}/like', [App\Http\Controllers\Api\PostController::class, 'unlike']);
+    Route::post('/posts/{post}/save', [App\Http\Controllers\Api\PostController::class, 'save']);
+    Route::delete('/posts/{post}/save', [App\Http\Controllers\Api\PostController::class, 'unsave']);
+    Route::post('/posts/{post}/comments', [App\Http\Controllers\Api\PostController::class, 'storeComment']);
+    Route::get('/posts/{post}/comments', [App\Http\Controllers\Api\PostController::class, 'getComments']);
 });
 
