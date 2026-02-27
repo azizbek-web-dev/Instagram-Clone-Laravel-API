@@ -24,4 +24,26 @@ class ProfileController extends Controller
             ],
         ]);
     }
+
+    public function update(Request $request)
+    {
+        $user = $request->user();
+
+        $validated = $request->validate([
+            'name' => 'sometimes|string|max:255',
+            'username' => 'sometimes|string|max:255|unique:users,username,' . $user->id,
+            'email' => 'sometimes|email|unique:users,email,' . $user->id,
+            'bio' => 'nullable|string|max:500',
+            'website' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:20',
+            'gender' => 'nullable|string|in:Male,Female,Other',
+        ]);
+
+        $user->update($validated);
+
+        return response()->json([
+            'message' => 'Profile updated',
+            'user' => $user->fresh(),
+        ]);
+    }
 }
