@@ -22,6 +22,7 @@ class StoryController extends Controller
         $items = [];
         foreach ($stories as $userId => $userStories) {
             $storyUser = $userStories->first()->user;
+            if (!$storyUser) continue;
             $viewed = StoryView::where('user_id', $user->id)
                 ->whereIn('story_id', $userStories->pluck('id'))
                 ->exists();
@@ -74,7 +75,6 @@ class StoryController extends Controller
             $storyUser = \App\Models\User::where('username', $username)->first();
         }
 
-        if (!$storyUser) {
         if (!$storyUser) {
             return response()->json(['message' => 'User not found'], 404);
         }
