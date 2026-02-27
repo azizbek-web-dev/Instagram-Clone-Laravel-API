@@ -22,3 +22,7 @@ Route::prefix('auth')->group(function () {
     Route::post('/logout', [App\Http\Controllers\Api\AuthController::class, 'logout'])->middleware('auth:sanctum');
 });
 
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/profile', [App\Http\Controllers\Api\ProfileController::class, 'show']);
+});
+
